@@ -1,0 +1,42 @@
+section .text
+    global _start
+
+_start:
+    ; Aquí llamas a las funciones o ejecutas tus operaciones
+    ; Para ejemplificar, terminamos y salimos
+    mov rax, 60        ; syscall: sys_exit
+    xor rdi, rdi       ; estado de salida 0
+    syscall
+
+section .text
+    global suma
+    global resta
+    global multiplicacion
+    global division
+
+; Obtener suma
+; Primer argumento en rdi, segundo en rsi
+suma:
+    mov rax, rdi
+    add rax, rsi
+    ret
+
+; Obtener resta
+resta:
+    mov rax, rdi
+    sub rax, rsi
+    ret
+
+; Obtener multiplicación
+multiplicacion:
+    mov rax, rdi
+    imul rax, rsi
+    ret
+
+; Obtener división
+division:
+    mov rax, rdi
+    cqo            ; Extiende rax en rdx:rax
+    idiv rsi       ; Divide rdx:rax entre rsi
+    ; Resultado en rax
+    ret
